@@ -1,0 +1,23 @@
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 150px;
+    color: #112e01;
+
+    .pageTitle {
+        font-size: 40px;
+        cursor: progress;
+    }
+
+    .navLinkContainer {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+    }
+
+    .navLink {
+        font-size: 20px;
+        cursor: pointer;
+    }
+}
