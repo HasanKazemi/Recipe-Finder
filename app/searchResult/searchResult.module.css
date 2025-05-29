@@ -20,6 +20,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     text-align: center;
     border: 1px solid;
 
@@ -31,5 +32,16 @@
 
     .title {
         padding: 10px;
+    }
+
+    .summary {
+        padding: 10px;
+        text-align: justify;
+    }
+
+    .moreBtn {
+        justify-self: flex-end;
+        margin: 10px;
+        cursor: pointer;
     }
 }
