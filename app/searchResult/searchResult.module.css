@@ -1,10 +1,8 @@
-/* .pageHeaderContainer {
-    background-image: url("../../public/result-bg.png");
-    background-size: cover;
-    background-position: top;
-    background-repeat: no-repeat;
-    height: 300px;
-} */
+.filterContainer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
 
 .resultContainer {
     display: grid;

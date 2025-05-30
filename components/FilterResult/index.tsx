@@ -1,22 +1,15 @@
-import { useEffect } from "react"
 import styles from "./filter.module.css"
-import { useRouter } from "next/navigation"
 import { FilterProps } from "@/types/types"
 
-const FilterResult = ({cuisine, setCuisine, query} : FilterProps) => {
-    const router = useRouter()
-    useEffect(() => {
-      router.push(`/searchResult?query=${query}&cuisine=${cuisine}`)
-    }, [cuisine])
-
+const FilterResult = ({label, values, setState} : FilterProps) => {
   return (
     <div className={styles.container}>
-        <select onChange={(e)=>setCuisine(e.target.value)}>
-            <option value="">cuisine</option>
-            <option value="italian">italian</option>
-            <option value="mexican">mexican</option>
-            <option value="chinese">chinese</option>
-            <option value="European">European</option>
+        <label>{label}</label>
+        <select onChange={(e)=>setState(e.target.value)} className={styles.select}>
+            <option value=""> - select - </option>
+            {values.map(item=>(
+                <option value={item} key={item}>{item}</option>
+            ))}
         </select>
     </div>
   )

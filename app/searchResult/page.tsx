@@ -12,17 +12,20 @@ const SearchResult = () => {
   const searchParams = useSearchParams()
   const query = searchParams.get('query')
   const [recipes, setRecipes] = useState<Recipes[] | []>([])
-  
+
   const [cuisine, setCuisine] = useState<string>("")
-  const changeCuisine = (value:string)=>{
-    setCuisine(value)
-  }
+  const [diet, setDiet] = useState<string>("")
+  const [sort, setSort] = useState<string>("")
+
+  const cuisineValues = ["Italian","Mxican","European"]
+  const dietValues = ["vegan","vegeterian"]
+  const sortValues= ["popularity","healthiness","time"]
 
     useEffect(() => {
       if (query) {
         const fetchRecipes = async () => {
           try {
-            const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}?query=${query}&cuisine=${cuisine}&number=20&apiKey=${process.env.NEXT_PUBLIC_API_KEY}&addRecipeInformation=true`);
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}?query=${query}&cuisine=${cuisine}&diet=${diet}&sort=${sort}&number=20&apiKey=${process.env.NEXT_PUBLIC_API_KEY}&addRecipeInformation=true`);
             setRecipes(res.data.results);
             console.log(res.data.results)
           } catch (err) {
@@ -31,12 +34,16 @@ const SearchResult = () => {
         };
         fetchRecipes();
       }
-    }, [query,cuisine]);
+    }, [query,cuisine,diet,sort]);
 
   return (
     <div>
       <Navbar />
-      <FilterResult cuisine={cuisine} setCuisine={setCuisine} query={query} />
+      <div className={styles.filterContainer}>
+        <FilterResult label="cuisine" values={cuisineValues} setState={setCuisine} />
+        <FilterResult label="diet" values={dietValues} setState={setDiet} />
+        <FilterResult label="sort" values={sortValues} setState={setSort} />
+      </div>
       <div className={styles.pageHeaderContainer}></div>
       <div className={styles.resultContainer}>
         {recipes.map(recipe=>(

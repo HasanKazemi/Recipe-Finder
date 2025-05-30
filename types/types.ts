@@ -6,7 +6,7 @@ export interface Recipes {
 }
 
 export interface FilterProps {
-    cuisine: string;
-    setCuisine: React.Dispatch<React.SetStateAction<string>>;
-    query: string | null;
+    label: string;
+    values: string[];
+    setState: React.Dispatch<React.SetStateAction<string>>;
 }
