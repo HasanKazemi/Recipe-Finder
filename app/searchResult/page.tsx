@@ -6,29 +6,37 @@ import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import styles from "./searchResult.module.css"
 import Navbar from '@/components/Navbar'
+import FilterResult from '@/components/FilterResult'
 
 const SearchResult = () => {
-    const searchParams = useSearchParams()
-    const query = searchParams.get('query')
-    const [recipes, setRecipes] = useState<Recipes[] | []>([])
+  const searchParams = useSearchParams()
+  const query = searchParams.get('query')
+  const [recipes, setRecipes] = useState<Recipes[] | []>([])
+  
+  const [cuisine, setCuisine] = useState<string>("")
+  const changeCuisine = (value:string)=>{
+    setCuisine(value)
+  }
 
     useEffect(() => {
       if (query) {
         const fetchRecipes = async () => {
           try {
-            const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}?query=${query}&number=20&apiKey=${process.env.NEXT_PUBLIC_API_KEY}&addRecipeInformation=true`);
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}?query=${query}&cuisine=${cuisine}&number=20&apiKey=${process.env.NEXT_PUBLIC_API_KEY}&addRecipeInformation=true`);
             setRecipes(res.data.results);
+            console.log(res.data.results)
           } catch (err) {
             console.error(err);
           }
         };
         fetchRecipes();
       }
-    }, [query]);
+    }, [query,cuisine]);
 
   return (
     <div>
       <Navbar />
+      <FilterResult cuisine={cuisine} setCuisine={setCuisine} query={query} />
       <div className={styles.pageHeaderContainer}></div>
       <div className={styles.resultContainer}>
         {recipes.map(recipe=>(
