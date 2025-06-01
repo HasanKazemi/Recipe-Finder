@@ -10,3 +10,9 @@ export interface FilterProps {
     values: string[];
     setState: React.Dispatch<React.SetStateAction<string>>;
 }
+
+export interface PaginationProps {
+    page: number;
+    setPage: React.Dispatch<React.SetStateAction<number>>;
+    totalPages: number;
+}

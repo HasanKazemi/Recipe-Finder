@@ -7,11 +7,15 @@ import { useEffect, useState } from 'react'
 import styles from "./searchResult.module.css"
 import Navbar from '@/components/Navbar'
 import FilterResult from '@/components/FilterResult'
+import Pagination from '@/components/pagination'
 
 const SearchResult = () => {
   const searchParams = useSearchParams()
   const query = searchParams.get('query')
   const [recipes, setRecipes] = useState<Recipes[] | []>([])
+  const [page, setPage] = useState<number>(1)
+  const [totalResults, setTotalResults] = useState<number>(0)
+  const [totalPages, setTotalPages] = useState<number>(0)
 
   const [cuisine, setCuisine] = useState<string>("")
   const [diet, setDiet] = useState<string>("")
@@ -24,17 +28,19 @@ const SearchResult = () => {
     useEffect(() => {
       if (query) {
         const fetchRecipes = async () => {
+          const offset = (page - 1) * 20
           try {
-            const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}?query=${query}&cuisine=${cuisine}&diet=${diet}&sort=${sort}&number=20&apiKey=${process.env.NEXT_PUBLIC_API_KEY}&addRecipeInformation=true`);
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}?query=${query}&cuisine=${cuisine}&diet=${diet}&sort=${sort}&offset=${offset}&number=20&apiKey=${process.env.NEXT_PUBLIC_API_KEY}&addRecipeInformation=true`);
             setRecipes(res.data.results);
-            console.log(res.data.results)
+            setTotalResults(res.data.totalResults);
+            setTotalPages(Math.ceil(totalResults / 20));
           } catch (err) {
             console.error(err);
           }
         };
         fetchRecipes();
       }
-    }, [query,cuisine,diet,sort]);
+    }, [query,cuisine,diet,sort,page]);
 
   return (
     <div>
@@ -55,6 +61,7 @@ const SearchResult = () => {
             </div>
           ))}
       </div>
+      <Pagination page={page} setPage={setPage} totalPages={totalPages} />
     </div>
   )
 }
