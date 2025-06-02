@@ -1,0 +1,107 @@
+.recipe-container {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: sans-serif;
+  direction: rtl;
+}
+
+.image-wrapper {
+  overflow: hidden;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.recipe-image {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.recipe-image:hover {
+  transform: scale(1.05);
+}
+
+.recipe-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #e76f51;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 8px;
+}
+
+.favorite-btn {
+  display: inline-block;
+  margin-bottom: 24px;
+  padding: 10px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.favorite-btn.add {
+  background-color: #2a9d8f;
+}
+
+.favorite-btn.add:hover {
+  background-color: #21867a;
+}
+
+.favorite-btn.remove {
+  background-color: #e63946;
+}
+
+.favorite-btn.remove:hover {
+  background-color: #c12836;
+}
+
+.recipe-section {
+  margin-bottom: 32px;
+}
+
+.recipe-section h2 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  color: #264653;
+}
+
+.recipe-section ul {
+  list-style: disc;
+  padding-right: 20px;
+  line-height: 1.7;
+  color: #444;
+}
+
+.instructions {
+  line-height: 1.8;
+  color: #555;
+  background-color: #f9f9f9;
+  padding: 16px;
+  border-radius: 10px;
+}
+
+.recipe-info {
+  font-size: 14px;
+  color: #666;
+  border-top: 1px solid #eee;
+  padding-top: 16px;
+}
+
+.recipe-info strong {
+  color: #000;
+}
+
+.loading {
+  text-align: center;
+  margin-top: 100px;
+  font-size: 18px;
+  color: #666;
+}

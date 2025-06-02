@@ -16,3 +16,7 @@ export interface PaginationProps {
     setPage: React.Dispatch<React.SetStateAction<number>>;
     totalPages: number;
 }
+
+export interface RecipeDetailProps {
+  params: { recipeId: string };
+}
