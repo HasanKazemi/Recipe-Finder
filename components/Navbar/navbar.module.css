@@ -2,7 +2,6 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding-top: 150px;
     color: #112e01;
 
     .pageTitle {
