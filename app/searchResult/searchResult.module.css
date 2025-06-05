@@ -1,4 +1,10 @@
 .filterContainer {
+    background-image: url("../../public/filter-bg.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 -100px;
+    height: 250px;
+    width: 100%;
     display: flex;
     justify-content: center;
     gap: 20px;
