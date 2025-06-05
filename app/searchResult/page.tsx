@@ -17,7 +17,6 @@ const SearchResult = () => {
   const [recipes, setRecipes] = useState<Recipes[] | []>([])
   const [page, setPage] = useState<number>(1)
   const [totalResults, setTotalResults] = useState<number>(0)
-  const [totalPages, setTotalPages] = useState<number>(0)
 
   const [cuisine, setCuisine] = useState<string>("")
   const [diet, setDiet] = useState<string>("")
@@ -27,15 +26,15 @@ const SearchResult = () => {
   const dietValues = ["vegan","vegeterian"]
   const sortValues= ["popularity","healthiness","time"]
 
+  const pageSize = 20
     useEffect(() => {
       if (query) {
         const fetchRecipes = async () => {
-          const offset = (page - 1) * 20
+          const offset = (page - 1) * pageSize
           try {
             const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}?query=${query}&cuisine=${cuisine}&diet=${diet}&sort=${sort}&offset=${offset}&number=20&apiKey=${process.env.NEXT_PUBLIC_API_KEY}&addRecipeInformation=true`);
             setRecipes(res.data.results);
             setTotalResults(res.data.totalResults);
-            setTotalPages(Math.ceil(totalResults / 20));
           } catch (err) {
             console.error(err);
           }
@@ -43,6 +42,8 @@ const SearchResult = () => {
         fetchRecipes();
       }
     }, [query,cuisine,diet,sort,page]);
+
+    const totalPages = Math.ceil(totalResults / pageSize)
 
   return (
     <div>
