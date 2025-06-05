@@ -5,7 +5,7 @@ import Navbar from '@/components/Navbar';
 
 const Details = async({params}:RecipeDetailProps) => {
     const id = params.recipeId;
-    const response = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.NEXT_PUBLIC_API_KEY}`)
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/recipes/${id}/information?apiKey=${process.env.NEXT_PUBLIC_API_KEY}`)
     const recipe = response.data
   return (
     <>

@@ -25,14 +25,24 @@ const SearchResult = () => {
   const cuisineValues = ["Italian","Mxican","European"]
   const dietValues = ["vegan","vegeterian"]
   const sortValues= ["popularity","healthiness","time"]
-
   const pageSize = 20
     useEffect(() => {
       if (query) {
         const fetchRecipes = async () => {
           const offset = (page - 1) * pageSize
           try {
-            const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}?query=${query}&cuisine=${cuisine}&diet=${diet}&sort=${sort}&offset=${offset}&number=20&apiKey=${process.env.NEXT_PUBLIC_API_KEY}&addRecipeInformation=true`);
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/recipes/complexSearch`,{
+              params: {
+                query,
+                cuisine,
+                diet,
+                sort,
+                offset,
+                number: pageSize,
+                apiKey: process.env.NEXT_PUBLIC_API_KEY,
+                addRecipeInformation: true,
+              }
+            });
             setRecipes(res.data.results);
             setTotalResults(res.data.totalResults);
           } catch (err) {
