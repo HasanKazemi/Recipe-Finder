@@ -1,0 +1,27 @@
+.favoriteBtn {
+  display: inline-block;
+  margin-bottom: 24px;
+  padding: 10px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+.favoriteBtn.add {
+  background-color: #2a9d8f;
+}
+
+.favoriteBtn.add:hover {
+  background-color: #21867a;
+}
+
+.favoriteBtn.remove {
+  background-color: #e63946;
+}
+
+.favoriteBtn.remove:hover {
+  background-color: #c12836;
+}

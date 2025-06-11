@@ -1,8 +1,8 @@
 import { extendedIngredients, RecipeDetailProps } from '@/types/types'
 import axios from 'axios';
-import './detail.css'
 import Navbar from '@/components/Navbar';
 import styles from './detail.module.css'
+import ToggleFavorite from '@/components/ToggleFavorite';
 
 const Details = async({params}:RecipeDetailProps) => {
     const id = params.recipeId;
@@ -23,9 +23,7 @@ const Details = async({params}:RecipeDetailProps) => {
 
         <h1 className={styles.recipeTitle}>{recipe.title}</h1>
 
-        <button>
-          add to favorites
-        </button>
+        <ToggleFavorite />
 
         <section className={styles.recipeSection}>
           <h2 className={styles.ingredientsTitle}>Ingredients🧂</h2>
