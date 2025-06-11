@@ -1,18 +1,17 @@
 "use client"
 import { Recipes } from '@/types/types'
 import axios from 'axios'
-import Image from 'next/image'
-import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import styles from "./searchResult.module.css"
 import Navbar from '@/components/Navbar'
 import FilterResult from '@/components/FilterResult'
 import Pagination from '@/components/pagination'
+import RecipesCard from '@/components/RecipesCards'
+import { useSearchParams } from 'next/navigation'
 
 const SearchResult = () => {
   const searchParams = useSearchParams()
   const query = searchParams.get('query')
-  const router = useRouter()
 
   const [recipes, setRecipes] = useState<Recipes[] | []>([])
   const [page, setPage] = useState<number>(1)
@@ -65,16 +64,7 @@ const SearchResult = () => {
       </div>
       <div className={styles.pageHeaderContainer}></div>
       <div className={styles.resultContainer}>
-        {recipes.map(recipe=>(
-            <div key={recipe.id} onClick={()=>router.push(`/details/${recipe.id}`)} className={styles.resultCard}>
-              <Image src={recipe.image} height={100} width={128} quality={95} alt='recipe' className={styles.thumbnail} />
-              <div className={styles.cardBody}>
-                <h4 className={styles.title}>{recipe.title}</h4>
-                <p className={styles.summary}>{recipe.summary.replace(/<[^>]+>/g, '').slice(0,100)}...</p>
-                <button className={styles.moreBtn}>more details</button>
-              </div>
-            </div>
-          ))}
+        <RecipesCard recipes={recipes} />
       </div>
       <Pagination page={page} setPage={setPage} totalPages={totalPages} />
     </div>
