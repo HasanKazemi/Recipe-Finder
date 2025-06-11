@@ -23,7 +23,7 @@ const Details = async({params}:RecipeDetailProps) => {
 
         <h1 className={styles.recipeTitle}>{recipe.title}</h1>
 
-        <ToggleFavorite />
+        <ToggleFavorite recipe={recipe} />
 
         <section className={styles.recipeSection}>
           <h2 className={styles.ingredientsTitle}>Ingredients🧂</h2>
