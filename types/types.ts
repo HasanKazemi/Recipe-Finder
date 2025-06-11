@@ -20,3 +20,7 @@ export interface PaginationProps {
 export interface RecipeDetailProps {
   params: { recipeId: string };
 }
+
+export interface extendedIngredients {
+    original: string;
+}
