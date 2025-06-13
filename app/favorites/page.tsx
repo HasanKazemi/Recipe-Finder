@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import './favorites.css';
 import Navbar from '@/components/Navbar';
+import RecipesCard from '@/components/RecipesCards';
 
 export default function FavoritesPage() {
   const [favorites, setFavorites] = useState<any[]>([]);
@@ -11,22 +12,17 @@ export default function FavoritesPage() {
 
   useEffect(() => {
     const loadFavorites = async () => {
-      const stored = localStorage.getItem('favorites') || '[]';
-      const ids = JSON.parse(stored);
+      const stored = JSON.parse(localStorage.getItem('favorites') || '[]');
+console.log(stored);
 
-      if (ids.length === 0) {
-        setFavorites([]);
-        setLoading(false);
-        return;
-      }
+      // if (ids.length === 0) {
+      //   setFavorites([]);
+      //   setLoading(false);
+      //   return;
+      // }
 
       try {
-        const requests = ids.map((id: string) =>
-          fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${process.env.NEXT_PUBLIC_SPOONACULAR_API_KEY}`)
-        );
-        const responses = await Promise.all(requests);
-        const data = await Promise.all(responses.map((res) => res.json()));
-        setFavorites(data);
+        setFavorites(stored);
       } catch (err) {
         console.error(err);
         setFavorites([]);
@@ -56,20 +52,7 @@ export default function FavoritesPage() {
             <p className="loading">there is no recipe exist.</p>
         ) : (
             <div className="grid">
-            {favorites.map((recipe) => (
-                <div key={recipe.id} className="card">
-                <img src={recipe.image} alt={recipe.title} className="card-image" />
-                <h2 className="card-title">{recipe.title}</h2>
-                <div className="card-actions">
-                    <button onClick={() => router.push(`/recipe/${recipe.id}`)} className="card-button">
-                        more details
-                    </button>
-                    <button onClick={() => handleRemove(recipe.id)} className="card-button remove">
-                        delete
-                    </button>
-                </div>
-                </div>
-            ))}
+              <RecipesCard recipes={favorites} />
             </div>
         )}
         </div>
